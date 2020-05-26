@@ -22,13 +22,16 @@ void setup(void)
   bno.setExtCrystalUse(true);
 }
 
-// In DNA sequences, a protein gene's beginning
-// is denoted by a "TATA" group,
-// which is the letters ATATATAT repeating,
-// and my "TATA" group to signal over serial
-// that a communication is beginning is 0xffaaffbb
+// In DNA sequences, a gene's starting point
+// is denoted by a "TATA" group, which is the
+// letters ATATATAT repeating, and my "TATA" group
+// which signals over serial that a communication (the gene)
+// is about to be transmitted, and instead of A & T, its:
 uint32_t TATA_Value = 0xffaaffbb;
 byte* TATA_Pointer = (byte*)&TATA_Value;
+
+// so in the python client, it can just idle and wait until it receives 
+// this "TATA" value, then it must listen for the vectors
 
 void loop(void) 
 {
