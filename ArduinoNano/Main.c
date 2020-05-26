@@ -35,12 +35,17 @@ void loop(void)
   imu::Vector<3> accel = bno.getVector(Adafruit_BNO055::VECTOR_LINEARACCEL);
 
   Serial.write(TATA_Pointer, 4);
+  
+  // I believe that each of these groups could be written in a single statement
+  // But this works, and i'm tired of debugging arduinos
   Serial.write((byte*)&grav.x(), 4);
   Serial.write((byte*)&grav.y(), 4);
   Serial.write((byte*)&grav.z(), 4);
+  
   Serial.write((byte*)&rot.x(), 4);
   Serial.write((byte*)&rot.y(), 4);
   Serial.write((byte*)&rot.z(), 4);
+  
   Serial.write((byte*)&accel.x(), 4);
   Serial.write((byte*)&accel.y(), 4);
   Serial.write((byte*)&accel.z(), 4);
