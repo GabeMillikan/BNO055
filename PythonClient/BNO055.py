@@ -25,7 +25,6 @@ class BNO055:
         self.acceleration = vector(0, 0, 0)
         self.lastUpdate = 0
         self.updateCount = 0
-        self.forwardVector = vector(0,0,1)
         
         self.die = False
         
@@ -58,39 +57,24 @@ class BNO055:
                 print(e)
                 self.serialConnection.close()
                 self.serialConnection.open()
-            
-            # try to calculate rotation matrix :shrug:
-            # orientation = (yaw, pitch, roll) = (alpha, beta, gamma)
-            yaw   = rad(self.orientation.x)
-            pitch = rad(self.orientation.y)
-            roll  = rad(self.orientation.z)
-    
-            self.forwardVector = vector(
-                cos(yaw) * cos(pitch),
-                cos(yaw) * sin(pitch) * sin(roll) - cos(yaw)*cos(roll),
-                cos(yaw) * sin(pitch) * cos(roll) + sin(yaw) * sin(roll))
     
     def close(self):
         self.die = True
         self.updateThread.join()
         self.serialConnection.close()
-f = open("data.txt", 'w+')
+
 if __name__ == "__main__":
     bno = BNO055()
-    input("press enter to start")
     try:
         while True:
             #print()
             #print("Gravity     : %s" % str(bno.gravity))
             print("Orientation : %s" % str(bno.orientation))
-            #print("forward     : %s" % str(bno.forwardVector))
             #print("Acceleration: %s" % str(bno.acceleration))
-            f.write(str(tuple(bno.orientation.get())) + ", " + str(tuple(bno.gravity.get())) + ",\n")
-            time.sleep(0.04)
+            time.sleep(1/20)
     except BaseException as e:
         print(e)
     bno.close()
-    f.close()
     
     
     
