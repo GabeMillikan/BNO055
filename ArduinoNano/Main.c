@@ -22,7 +22,7 @@ void setup(void)
   bno.setExtCrystalUse(true);
 }
 
-// In DNA sequences, a protein sequence's beginning
+// In DNA sequences, a protein gene's beginning
 // is denoted by a "TATA" group,
 // which is the letters ATATATAT repeating,
 // and my "TATA" group to signal over serial
