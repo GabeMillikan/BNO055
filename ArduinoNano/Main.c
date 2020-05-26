@@ -22,6 +22,11 @@ void setup(void)
   bno.setExtCrystalUse(true);
 }
 
+// In DNA sequences, a protein sequence's beginning
+// is denoted by a "TATA" group,
+// which is the letters ATATATAT repeating,
+// and my "TATA" group to signal over serial
+// that a communication is beginning is 0xffaaffbb
 uint32_t TATA_Value = 0xffaaffbb;
 byte* TATA_Pointer = (byte*)&TATA_Value;
 
